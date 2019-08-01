@@ -2,6 +2,7 @@
 #include <ctime>
 #include <clocale>
 using namespace std;
+
 int main(){
 	setlocale(LC_ALL, "");//ou setlocale(LC_ALL, "portuguese");
 	time_t now = time(0);

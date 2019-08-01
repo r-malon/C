@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <windows.h>
 using namespace std;
+
 int main(){
 	int x;
 	int y[20];
@@ -10,7 +11,7 @@ int main(){
 		cin >> x;
 		y[i] = x;
 		int cont = count(y, y+20,x);
-		if (cont>1) {
+		if (cont > 1) {
 			cout << "msg automatica";
 		}
 		else {
@@ -18,4 +19,5 @@ int main(){
 		}
 		Sleep(500); //miliseconds!
 	}
+	return 0;
 }

@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <string>
 using namespace std;
+
 int main(){
 	char ola[30];
 	int a=89;

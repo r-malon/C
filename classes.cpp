@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+
 class forma{
 	public:
 		int alt, larg;
@@ -12,9 +13,10 @@ class forma{
 	h = x;
 	l = y;
 }*/
+
 int main(){
 	forma bla;
-	forma ble;		//tudoerradoaki!
+	forma ble; //tudoerradoaki!
 	cout << "diga: ";
 	cin >> bla.alt;
 	cout << "dnovo: ";

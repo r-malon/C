@@ -1,11 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 struct Carro {
 	int custo;
 	char marca[20];
 	char cor[20];
 };
+
 int main(){
 	struct Carro Gol;
 	char cor2[20];

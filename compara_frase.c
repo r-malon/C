@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
+
 void main(){
 	char str1[4];
 	char str2[4];

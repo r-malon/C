@@ -2,6 +2,7 @@
 #include <cstring>
 #include <locale>
 using namespace std;
+
 /*#ifdef __cplusplus
 #error trolei, c++ negado!
 #error blabla
@@ -10,6 +11,7 @@ struct obj {
 	char name[];
 	float price;
 };
+
 int main(void){
 	setlocale(LC_ALL, "Portuguese");
 	cout << "compilação inîciada no dia " << __DATE__ << endl;

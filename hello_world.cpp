@@ -16,6 +16,6 @@ int main(){
 		cout << "i said hey";
 		nab++;
 	};
-	system("pause"); //quase inútil
+	system("pause");
 	return 0;
 }

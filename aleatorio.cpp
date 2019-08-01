@@ -7,13 +7,13 @@ using namespace std;
 int main(){
 	setlocale(LC_ALL, "");
 	char word[20];
-	cout << "Digite:";
+	cout << "Digite: ";
 	cin >> word;
 	int c = strlen(word);
 	int lst[c];
 
 	for(int i=0;i++;i<c){
-		int y=srand(time(NULL))%c;
+		int y = srand(time(NULL))%c;
 		lst[i] = y;
 	}
 

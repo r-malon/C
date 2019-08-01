@@ -4,6 +4,7 @@
 using namespace std;
 int const eterna = 10;
 //eterna = 24 --> variável imutável(read-only)
+
 int main(void){
 	setlocale(LC_ALL, "");
 	int y = 28ul;
