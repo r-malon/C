@@ -1,22 +1,24 @@
 #include <iostream>
 #include <exception>
 using namespace std;
+
 int main(){
 	int x;
 	cout << "digite: ";
 	cin >> x;
-	try{
-		if(x>10){
+
+	try {
+		if (x > 10) {
 			throw(80); //lança erro qualquer
 		}
-		if(x>20){
+		if (x > 20) {
 			throw("a");
 		}
-		cout << "tudo certo!"; //escreve isso se não der erro
+		cout << "Tudo certo!"; //escreve isso se não der erro
 	}
-	catch(char let){
+	catch (char let) {
 		//if(let == *"a"){
-			cout << "otro erro, maior q 20";
+			cout << "Outro erro, maior do que 20";
 		//}
 	}
 	/*catch(...){// (...): erro genérico
@@ -31,7 +33,7 @@ int main(){
 		}
 		else {
 			return a/b;
-			}
+		}
 	}
 	catch(int erro) {
 		if (erro == 1) {

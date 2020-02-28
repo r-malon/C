@@ -3,16 +3,16 @@
 #include <string>
 using namespace std;
 
-int main(){
+int main() {
 	char ola[30];
-	int a=89;
-	int b=27;
-	int *pt=&a;
-	int *pj=&b;
-	//cout<<"bla: ";
+	int a = 89;
+	int b = 27;
+	int *pt = &a;
+	int *pj = &b;
+	//cout << "bla: ";
 	//std::getline(cin,ola);
 	//cout << "isso " << ola << endl;
-	cout << "endereco: " << pt << endl;
-	cout << "valor do endereco: " << *pt << endl;
-	cout << "soma de a+b: " << *pt+*pj;
+	cout << "Address: " << pt << endl;
+	cout << "Address value: " << *pt << endl;
+	cout << "A + B: " << *pt + *pj;
 }

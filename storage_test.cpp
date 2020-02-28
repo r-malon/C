@@ -12,21 +12,22 @@ struct obj {
 	float price;
 };
 
-int main(void){
+int main() {
 	setlocale(LC_ALL, "Portuguese");
-	cout << "compilação inîciada no dia " << __DATE__ << endl;
+	cout << "Compilação inîciada no dia " << __DATE__ << endl;
 	struct obj cadeira;
 	int x = 23243543;
-	//int lis[] = {43, 69, {12, 67, 45}, 654}; //sublista
+	//int list[] = {43, 69, {12, 67, 45}, 654}; //sublist
 	char y[] = "yprueeghtyqeeebgfydugfsydufhdujhndhnnhdfnsiuhviiurihcueiwrurifbsdiyidyyncvm";
 	int oco = 15.87;
 	float a = 2;
 	int list[] = {3, 5, 6, 77};
 	bool verd = 0;
 	list[8] = 60;
-	//typedef int intero --> muda nome do tipo de dado
+	//typedef int inteiro --> muda nome do tipo de dado
 	int& ref = x; //referencia
-	switch(oco){
+
+	switch(oco) {
 		case 40:
 			cout << "bla" << endl;
 			break;

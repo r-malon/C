@@ -2,35 +2,39 @@
 #include <windows.h>
 #include <clocale>
 using namespace std;
-class guns{
-	//private por padrão
+
+class Gun {
+	//private by default
 	public:
-		guns(string _name,string _mode,int _ammo, int _rpm): //construtor
-			name(_name),mode(_mode),rpm(_rpm),ammo(_ammo),pente(_ammo){};
+		Gun(string _name, string _mode, int _ammo, int _fire_rate): //constructor
+			name(_name), mode(_mode), fire_rate(_fire_rate), ammo(_ammo), pente(_ammo){};
 		string name;
 		string mode;
 		int ammo;
-		int rpm;
-		int changemode(){
+		int fire_rate;
+
+		int changemode() {
 			cout << "Diga um modo: ";
 			cin >> mode;
 		}
-		int reload(){
+
+		int reload() {
 			ammo = pente;
 		}
-		void shoot(){
-			if(mode=="semi-auto"){
+
+		void shoot() {
+			if (mode == "semi-auto") {
 				ammo -= 1;
-				Sleep(60000/rpm); //milisegundos
+				Sleep(60000/fire_rate); //miliseconds
 			}
-			if(mode=="burst"){
-				for(int i=0;i<3;i++){
+			if (mode == "burst") {
+				for(int i = 0; i < 3; i++) {
 					ammo -= 1;
-					Sleep(60000/rpm);
+					Sleep(60000/fire_rate);
 				}
 				//ammo -= 3;
 			}
-			else{
+			else {
 				changemode();
 			}
 		}
@@ -38,16 +42,17 @@ class guns{
 		int pente = ammo;
 	//protected:
 };
-int main(){
+
+int main() {
 	setlocale(LC_ALL, "");
-	guns fuzil("m16", "burst", 30, 120);
-	/*fuzil.name = "M-16";
-	fuzil.ammo = 50;*/
-	cout << "O fuzil " << fuzil.name << " atira em modo " << fuzil.mode << " tem " << fuzil.ammo << " projéteis\n";
-	fuzil.shoot();
-	//fuzil.changemode();
-	//fuzil.shoot();
-	cout << "ammo: " << fuzil.ammo << endl;
-	fuzil.reload();
-	cout << "carregado: " << fuzil.ammo;
+	Gun rifle("M16", "burst", 30, 120);
+	/*rifle.name = "M-16";
+	rifle.ammo = 50;*/
+	cout << "O fuzil " << rifle.name << " atira em modo " << rifle.mode << " e tem " << rifle.ammo << " projéteis\n";
+	rifle.shoot();
+	//rifle.changemode();
+	//rifle.shoot();
+	cout << "Ammo: " << rifle.ammo << endl;
+	rifle.reload();
+	cout << "Loaded: " << rifle.ammo;
 }

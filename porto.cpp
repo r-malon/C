@@ -1,23 +1,23 @@
 #include <iostream>
 using namespace std;
 
-int main(){
+int main() {
 	int total;
 	int x;
-	do{
-		cout << "diga qnts conteiners vai carregar: ";
+	do {
+		cout << "Diga quantos conteiners serão carregados: ";
 		cin >> x;
-		while(x > 50){
-			cout << "nao cabe no navio, diga dnovo: ";
+		while (x > 50) {
+			cout << "Não cabe no navio, diga novamente: ";
 			cin >> x;
 		}
-		if(x==50){
+		if (x == 50) {
 			cout << "NAVIO CARREGADO!!!";
 			break;
 		}
-		else{
+		else {
 			total += x;
 		}
 	}
-	while(total<=50);
+	while (total <= 50);
 }
