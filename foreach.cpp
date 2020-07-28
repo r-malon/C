@@ -5,7 +5,8 @@ using namespace std;
 int main() {
 	char ola[] = "Hello Anatoli!";
 	cout << "Tamanho: " << strlen(ola) << endl;
-	for (auto x : ola) { //auto: detects type
+	// auto: detects type
+	for (auto x : ola) {
 		cout << "Character: " << x << endl;
 	}
 }
