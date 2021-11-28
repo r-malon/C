@@ -4,7 +4,8 @@
 #include <ctime>
 using namespace std;
 
-int main() {
+int
+main() {
 	setlocale(LC_ALL, "");
 	char word[20];
 	cout << "Digite: ";
@@ -12,12 +13,12 @@ int main() {
 	int c = strlen(word);
 	int list[c];
 
-	for(int i = 0; i < c; i++) {
+	for (int i=0; i<c; i++) {
 		int y = srand(time(NULL)) % c;
 		list[i] = y;
 	}
 
-	for(int i = 0; i < c; i++) {
+	for (int i=0; i<c; i++) {
 		cout << word[list[i]];
 	}
 }

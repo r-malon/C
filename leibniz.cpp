@@ -5,11 +5,10 @@ int main() {
 	bool neg = true;
 	double result = 1;
 
-	for (int i = 3; i < 999999; i = i + 2) {
+	for (int i=3; i<999999; i=i+2) {
 		if (neg) {
 			result -= 1.0/i;
-		}
-		else {
+		} else {
 			result += 1.0/i;
 		}
 		neg = not neg;

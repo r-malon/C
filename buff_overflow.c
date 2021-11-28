@@ -1,20 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*void hack() {
+/*
+void hack() {
 	int *foo;
 	while (true) {
 		foo = malloc(50000); //bytes
 		Sleep(1000);
 	}
-}*/
+}
+*/
 
 int main() {
-	/*int x;
-	x = fork(); //LINUX EXCLUSIVE
+	/*
+	int x;
+	x = fork();
 	if (x == 0) {
 		hack();
-	}*/
+	}
+	*/
 	//return 0;
 	char ble[95];
 	scanf("%s", ble);
