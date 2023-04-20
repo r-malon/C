@@ -13,7 +13,6 @@ int main() {
 		}
 		neg = not neg;
 	}
-
 	cout << result * 4.0;
 	return 0;
 }

@@ -8,24 +8,25 @@ main(int argc, char const *argv[])
 	int fizz, buzz;
 	bool modfizz, modbuzz;
 
-	printf("Enter Fizz: ");
-	scanf("%d", &fizz);
-	printf("Enter Buzz: ");
-	scanf("%d", &buzz);
-	printf("Enter how many times you want to FizzBuzz: ");
-	scanf("%d", &n);
-
+	if (argc < 2) {
+		fputs("Enter Fizz: ", stdout);
+		scanf("%d", &fizz);
+		fputs("Enter Buzz: ", stdout);
+		scanf("%d", &buzz);
+		fputs("Enter how many times you want to FizzBuzz: ", stdout);
+		scanf("%d", &n);
+	} else {}
 	for (i = 1; i <= n; ++i) {
 		modfizz = !(i % fizz), modbuzz = !(i % buzz);
 		if (modfizz || modbuzz) {
 			if (modfizz)
-				printf("Fizz");
+				fputs("Fizz", stdout);
 			if (modbuzz)
-				printf("Buzz");
+				fputs("Buzz", stdout);
 		} else {
 			printf("%d", i);
 		}
-		printf("\n");
+		putchar('\n');
 	}
 	return 0;
 }

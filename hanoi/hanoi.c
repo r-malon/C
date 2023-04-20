@@ -32,7 +32,7 @@ void
 add_disk(int i, int d)
 {
 	t[i]->x[t[i]->n++] = d;
-	text(t[i]->n, i, d, "==");
+	text(t[i]->n, i, d, TOWER_BLOCK);
 
 	usleep(SLEEP_TIME);
 	fflush(stdout);

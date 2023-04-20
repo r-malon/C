@@ -1,7 +1,8 @@
-#ifndef HANOI
-#define HANOI
+#ifndef HANOI_H
+#define HANOI_H
 
-#define SLEEP_TIME 100000
+#define SLEEP_TIME	 100000
+#define TOWER_BLOCK	 "=="
 
 typedef struct Tower { int *x, n; } Tower;
 
@@ -14,4 +15,4 @@ void add_disk(int i, int d);
 int remove_disk(int i);
 void move(int n, int from, int to, int via);
 
-#endif /* HANOI */
+#endif /* HANOI_H */

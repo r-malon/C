@@ -1,9 +1,7 @@
 /*
 Framebuffer template program
-
 Run this and the screen goes blank for 2 seconds, then comes back.
 */
-
 #include <unistd.h>
 #include <fcntl.h>
 #include <sys/mman.h>	/* for mmap */
@@ -38,7 +36,7 @@ fbinit(void)
 	int fbfd; // frame buffer file descriptor
 	fbfd = open("/dev/fb0", O_RDWR);
 	if (fbfd == -1) {
-		fprintf(stderr,"Error opening /dev/fb0\n");
+		fprintf(stderr, "Error opening /dev/fb0\n");
 		perror("open ");
 		exit(1);
 	}
@@ -62,10 +60,14 @@ fbinit(void)
 	screenbytes = finfo.smem_len;
 	backp = malloc(screenbytes);
 	if (backp == NULL) {
-		fprintf(stderr, "Can't malloc %u bytes to back up screen\n", screenbytes);
+		fprintf(
+			stderr, "Can't malloc %u bytes to back up screen\n", screenbytes);
 		exit(1);
 	}
-	fbp = (char *) mmap(NULL, finfo.smem_len, PROT_READ|PROT_WRITE, MAP_SHARED, fbfd, 0);
+	fbp = mmap(
+		NULL, finfo.smem_len, 
+		PROT_READ|PROT_WRITE, MAP_SHARED, 
+		fbfd, 0);
 	if (fbp < 0) { // returns (void *) -1 on error
 		fprintf(stderr, "mmap failed\n");
 		perror("mmap ");
@@ -74,7 +76,7 @@ fbinit(void)
 	close(fbfd); // don't need anymore
 	memcpy(backp, fbp, screenbytes); // back up screen
 	bzero(fbp, screenbytes); // fill screen with black
-} // end fbinit
+}
 
 
 int
