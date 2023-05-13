@@ -249,12 +249,12 @@ initMaps()
 	maps[7].obstacles.push_back(Obstacle(Point(2, 2), 7, 0, Point(-2, 2)));
 	maps[7].obstacles.push_back(Obstacle(Point(0, 0), 9, 10, .5)); int canonid = maps[7].obstacles.size() - 1;
 	maps[7].obstacles.push_back(Obstacle(Point(-27, -3), 10, canonid));
-	for (int i=0; i<7; i++)
+	for (int i = 0; i < 7; i++)
 		maps[7].obstacles.push_back(Obstacle(Point(-24+3*i, -4), 11, 2*i, Point(-24+3*i, 4)));
 	maps[7].obstacles.push_back(Obstacle(Point(0, -27), 1, 1, 10));
 	maps[7].obstacles.push_back(Obstacle(Point(0, 0), 12, 10)); maps[7].begin.spar(maps[7].obstacles.size() - 1, Point(0, -20));
 	int xid = maps[7].obstacles.size();
-	for (int i=0; i<5; i++)
+	for (int i = 0; i < 5; i++)
 		maps[7].obstacles.push_back(Obstacle(Point((i%2)?-4:4, 9+4*i), 0, 5));
 	maps[7].obstacles.push_back(Obstacle(Point(xid,xid+1), 14, xid+2, Point(xid+3, xid+4), -1));
 	maps[7].obstacles.push_back(Obstacle(Point(0, 0), 13, xid+5, Point(1, 0)));
@@ -309,18 +309,18 @@ linecircle(Point p, Point q, Point r, float rad = pw)
 	float dr = sqrt(dx*dx + dy*dy);
 	float D = A.x*B.y - A.y*B.x;
 	float Del = rad*dr*dr - D*D;
-	Point X = Point((D*dy + ((dy>=0)?1:-1)*dx*sqrt(rad*dr*dr - D*D))/dr/dr, (-D*dy + fabs(dy)*sqrt(rad*dr*dr - D*D))/dr/dr);
-	Point Y = Point((D*dy - ((dy>=0)?1:-1)*dx*sqrt(rad*dr*dr - D*D))/dr/dr, (-D*dy - fabs(dy)*sqrt(rad*dr*dr - D*D))/dr/dr);
+	Point X = Point((D*dy + ((dy >= 0) ? 1: -1) * dx * sqrt(rad*dr*dr - D*D))/dr/dr, (-D * dy + fabs(dy) * sqrt(rad*dr*dr - D*D))/dr/dr);
+	Point Y = Point((D*dy - ((dy >= 0) ? 1: -1) * dx * sqrt(rad*dr*dr - D*D))/dr/dr, (-D * dy - fabs(dy) * sqrt(rad*dr*dr - D*D))/dr/dr);
 	if (Del > 0) {
 		float t1 = -1, t2 = -1;
 		if (A.x != B.x)
-			t1 = (X.x - A.x)/(B.x - A.x);
+			t1 = (X.x - A.x) / (B.x - A.x);
 		else
-			t1 = (X.y - A.y)/(B.y - A.y);
+			t1 = (X.y - A.y) / (B.y - A.y);
 		if (A.x != B.x)
-			t2 = (Y.x - A.x)/(B.x - A.x);
+			t2 = (Y.x - A.x) / (B.x - A.x);
 		else
-			t2 = (Y.y - A.y)/(B.y - A.y);
+			t2 = (Y.y - A.y) / (B.y - A.y);
 		if ((t1 > 0 && t1 < 1) || (t2 > 0 && t2 < 1))
 			return true;
 	}
@@ -348,8 +348,8 @@ CreateSphere(double r, int n)
 	struct {
 		double x, y, z;
 	} e, p;
-	const float TWOPI = 2*M_PI;
-	const float PID2 = M_PI/2;
+	const float TWOPI = 2 * M_PI;
+	const float PID2 = M_PI / 2;
 
 	if (r < 0)
 	  r = -r;
@@ -362,12 +362,12 @@ CreateSphere(double r, int n)
 	  return;
 	}
 
-	for (j=0; j<n/2; j++) {
+	for (j = 0; j < n/2; j++) {
 	  theta1 = j * TWOPI / n - PID2;
 	  theta2 = (j + 1) * TWOPI / n - PID2;
 
 	  glBegin(GL_QUAD_STRIP);
-	  for (i=0; i<=n; i++) {
+	  for (i = 0; i <= n; i++) {
 	     theta3 = i * TWOPI / n;
 
 	     e.x = cos(theta2) * cos(theta3);
@@ -496,10 +496,10 @@ initLists()
 		glEndList();
 	}
 	font[0] = glGenLists(256);
-	for (int i=0; i<255; i++) {
+	for (int i = 0; i < 255; i++) {
 		font[i] = font[0] + i;
 		glNewList(font[i], GL_COMPILE);
-		for (int j=0; j<8; j++) {
+		for (int j = 0; j < 8; j++) {
 			unsigned char c = gfxPrimitivesFontdata[i*8+j];
 			for (int k=0;k<8;k++)
 				if (c & (1 << (7-k))) {
@@ -544,7 +544,7 @@ write(float x, float y, std::string str)
 	orthogonal();
 	glTranslatef(x, y, 0);
 	glScalef(1/80., 1/25., 1);
-	for (int i=0; i<str.size(); i++) {
+	for (int i = 0; i < str.size(); i++) {
 		glCallList(font[str[i]]);
 		glTranslatef(1, 0, 0);
 	}
@@ -602,7 +602,7 @@ drawscene()
 	glScalef(1.15*pw, 1.15*pw, 1.15*pw);
 	float x = 1, y = 0;
 
-	for (int i=0; i<10; i++) {
+	for (int i = 0; i < 10; i++) {
 		const int N = 100;
 		if (state.success)
 			glTranslatef(0, 0, (sin((1+pw)*M_PI/2*state.t)+1)/4);
@@ -615,7 +615,7 @@ drawscene()
 		glCallList(circle);
 	}
 	glPopMatrix();
-	for (int i=0; i<map.obstacles.size(); i++) {
+	for (int i = 0; i < map.obstacles.size(); i++) {
 		if (state.nexists(i))
 			continue;
 		if (map.obstacles[i].t == 0) {
@@ -667,7 +667,7 @@ drawscene()
 			glTranslatef(map.obstacles[i].p.x, map.obstacles[i].p.y, 0.1);
 			const int N = 100;
 			float x = 1, y = 0;
-			for (int j=0; j<10; j++) {
+			for (int j = 0; j < 10; j++) {
 				glTranslatef(0, 0, 0.05*(sin(10*state.t)+1.5));
 				glBegin(GL_LINE_LOOP);
 				if (state.energy >= map.obstacles[i].par)
@@ -704,7 +704,7 @@ drawscene()
 			glVertex3f(-1, 1, 0);
 			glEnd();
 			float T = fmod(4*state.t, pw);
-			for (float j=0; j<map.obstacles[i].par; j+=pw) {
+			for (float j = 0; j < map.obstacles[i].par; j+=pw) {
 				glPushMatrix();
 				float R = T + pw*j;
 				glScalef(R, R, R);
@@ -789,7 +789,7 @@ drawscene()
 			glPopMatrix();
 		}
 	}
-	for (int i=0; i<state.shots.size(); i++) {
+	for (int i = 0; i < state.shots.size(); i++) {
 		glPushMatrix();
 		float X, Y, Z, T;
 		const float k = 1;
@@ -803,8 +803,9 @@ drawscene()
 		glCallList(sphere);
 		glPopMatrix();	
 		bool F = false;
-		for (int j=0; j<map.obstacles.size(); j++) {
-			if (!(map.obstacles[j].t == 7 && map.obstacles[j].par > 0.5 && Z < 4 && linecircle(map.obstacles[j].p, map.obstacles[j].q, Point(X, Y), 0.5))) continue;
+		for (int j = 0; j < map.obstacles.size(); j++) {
+			if (!(map.obstacles[j].t == 7 && map.obstacles[j].par > 0.5 && Z < 4 && linecircle(map.obstacles[j].p, map.obstacles[j].q, Point(X, Y), 0.5)))
+				continue;
 			state.hide(j);
 			state.shots.erase(state.shots.begin()+i);
 			F = true;
@@ -812,8 +813,9 @@ drawscene()
 		}
 		if (Z < -0.3 && !F) {
 			state.shots.erase(state.shots.begin()+i);
-			for (int j=0; j<map.obstacles.size(); j++) {
-				if (state.nexists(j)) continue;
+			for (int j = 0; j < map.obstacles.size(); j++) {
+				if (state.nexists(j))
+					continue;
 				if (map.obstacles[j].t == 4 && del(Point(X, Y), map.obstacles[j].p) < pw)
 					state.spar((int)map.obstacles[j].par, map.obstacles[j].par2);
 				if (map.obstacles[j].t == 11 && del(Point(X, Y), senemypos(map.obstacles[j].p, map.obstacles[j].q, map.obstacles[j].par)) < (pw+1))
@@ -828,7 +830,7 @@ drawscene()
 		glPushMatrix();
 		glTranslatef(state.p.x, state.p.y, 4*state.t);
 		glScalef(pw, pw, pw);
-		glColor4f(1, 1, 1, 2+pw-4*state.t);
+		glColor4f(1, 1, 1, 2 + pw - 4*state.t);
 		glCallList(sphere);
 		glPopMatrix();
 	}
@@ -839,11 +841,12 @@ validpos(Point p, int mode=0)
 {
 	if (p.x+pw > map.r || p.x-pw < map.l || p.y+pw > map.u || p.y-pw < map.d)
 		return false;
-	for (int i=0; i<map.obstacles.size(); i++)
-		if (map.obstacles[i].t == 7 && linecircle(map.obstacles[i].p, map.obstacles[i].q, p, (mode == 1)?3.3:pw) && (state.par(i) < 0.5 || mode == 1) && state.exists(i))
+	for (int i = 0; i < map.obstacles.size(); i++)
+		if (map.obstacles[i].t == 7 && linecircle(map.obstacles[i].p, map.obstacles[i].q, p, (mode == 1) ? 3.3 : pw) && (state.par(i) < 0.5 || mode == 1) && state.exists(i))
 			return false;
 	return true;
 }
+
 
 int
 main(int argc, char** argv)
@@ -890,8 +893,8 @@ main(int argc, char** argv)
 						case SDLK_ESCAPE: running = false;
 						case 'r': state = map.begin; break;
 						case 't': showtime = !showtime; break;
-						case SDLK_PAGEUP: if (grad > -90) grad-=1; break;
-						case SDLK_PAGEDOWN: if (grad < 0) grad+=1; break;
+						case SDLK_PAGEUP: if (grad > -90) --grad; break;
+						case SDLK_PAGEDOWN: if (grad < 0) ++grad; break;
 					}
 				break;	
 				case SDL_MOUSEBUTTONDOWN:
@@ -901,7 +904,7 @@ main(int argc, char** argv)
 				case SDL_MOUSEBUTTONUP:
 					if (event.button.button == SDL_BUTTON_LEFT) {
 						if (!mau && state.canon >= 0 && state.energy >= map.obstacles[state.canon].par2) {
-							state.shots.push_back(Shot(state.t, map.obstacles[state.canon].p, Point(mX, mY).norm(), map.obstacles[state.canon].par*sqrt(mX*mX+mY*mY)));
+							state.shots.push_back(Shot(state.t, map.obstacles[state.canon].p, Point(mX, mY).norm(), map.obstacles[state.canon].par * sqrt(mX*mX + mY*mY)));
 							state.energy -= map.obstacles[state.canon].par2;
 							if (state.energy < map.obstacles[state.canon].par2)
 								event.button.button = SDL_BUTTON_RIGHT;
@@ -929,7 +932,7 @@ main(int argc, char** argv)
 				}
 			}
 			else if (validpos(state.p + Point(0,-mY))) {
-				state.p.y-=mY;
+				state.p.y -= mY;
 				while (validpos(state.p + Point(0.01*sgn(mX), 0))) {
 					state.p.x += 0.01 * sgn(mX);
 				}
@@ -948,8 +951,9 @@ main(int argc, char** argv)
 			state.T = state.t;
 			state.t = 0;
 		}
-		for (int i=0; i<map.obstacles.size(); i++) {
-			if (state.nexists(i)) continue;
+		for (int i = 0; i < map.obstacles.size(); i++) {
+			if (state.nexists(i))
+				continue;
 			if (map.obstacles[i].t == 0 && del(state.p, map.obstacles[i].p) < map.obstacles[i].par && state.par(i) < 0.5) {
 				state.energy -= 1;
 				if (state.energy < 0)

@@ -1,6 +1,6 @@
 /*
 cat - concatenate and print files
-usage: cat [-u] [file...]
+Usage: cat [-u] [file...]
 */
 #include <stdio.h>
 #include <stdlib.h>

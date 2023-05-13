@@ -1,11 +1,10 @@
 /*
 Originally from https://rosettacode.org/wiki/Towers_of_Hanoi#C
-Formatted to follow https://suckless.org/coding_style/
+Fixed and formatted to follow https://suckless.org/coding_style/
 */
-
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <time.h>
 
 #include "hanoi.h"
 
@@ -13,8 +12,8 @@ Formatted to follow https://suckless.org/coding_style/
 Tower *
 new_tower(int cap)
 {
-	Tower *t = calloc(1, sizeof(Tower) + sizeof(int) * cap);
-	t->x = (int *)(t + 1);
+	Tower *t = calloc(1, sizeof (Tower) + sizeof (int) * cap);
+	t->disks = (int *)(t + 1);
 	return t;
 }
 
@@ -25,24 +24,24 @@ text(int y, int i, int d, const char *s)
 		height - y + 1, 
 		(height + 1) * (2 * i + 1) - d);
 	while (d--)
-		printf("%s", s);
+		fputs(s, stdout);
 }
 
 void
 add_disk(int i, int d)
 {
-	t[i]->x[t[i]->n++] = d;
-	text(t[i]->n, i, d, TOWER_BLOCK);
+	towers[i]->disks[towers[i]->size++] = d;
+	text(towers[i]->size, i, d, TOWER_BLOCK);
 
-	usleep(SLEEP_TIME);
+	nanosleep((const struct timespec[]){{0, SLEEP_TIME}}, NULL);
 	fflush(stdout);
 }
 
 int
 remove_disk(int i)
 {
-	int d = t[i]->x[--t[i]->n];
-	text(t[i]->n + 1, i, d, "  ");
+	int d = towers[i]->disks[--towers[i]->size];
+	text(towers[i]->size + 1, i, d, EMPTY_BLOCK);
 	return d;
 }
 
@@ -58,16 +57,16 @@ move(int n, int from, int to, int via)
 
 
 int
-main(int c, char *v[])
+main(int argc, char *argv[])
 {
 	puts("\033[H\033[J");
 
-	if (c <= 1 || (height = atoi(v[1])) <= 0)
+	if (argc <= 1 || (height = atoi(argv[1])) <= 0)
 		height = 8;
-	for (c = 0; c < 3; c++)
-		t[c] = new_tower(height);
-	for (c = height; c; c--)
-		add_disk(0, c);
+	for (argc = 0; argc < N_TOWERS; argc++)
+		towers[argc] = new_tower(height);
+	for (argc = height; argc; argc--)
+		add_disk(0, argc);
 
 	move(height, 0, 2, 1);
 	text(1, 0, 1, "\n");
