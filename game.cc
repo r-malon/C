@@ -18,9 +18,9 @@
 	Fifth Floor, Boston, MA 02110-1301, USA.
 */
 
-#include <SDL.h>
-#include <SDL_opengl.h>
-#include <SDL_gfxPrimitives_font.h>
+#include <SDL/SDL.h>
+#include <SDL/SDL_opengl.h>
+#include <SDL/SDL_gfxPrimitives_font.h>
 #include <GL/glut.h>
 #include <math.h>
 #include <stdlib.h>
@@ -209,7 +209,7 @@ initMaps()
 	maps[5].target = Point(27, 27);
 	maps[5].portalmin = 10;
 	maps[5].obstacles.push_back(Obstacle(Point(7, 7), 1, 10, 10));
-	#define tele(X, Y, Z) \
+#define tele(X, Y, Z) \
 	maps[5].obstacles.push_back(Obstacle(Point((X-1)%3*10+3, (X-1)/3*10+7), 3, 10, Point((Y-1)%3*10+3, (Y-1)/3*10+3)));\
 	maps[5].obstacles.push_back(Obstacle(Point((X-1)%3*10+7, (X-1)/3*10+3), 3, 10, Point((Z-1)%3*10+3, (Z-1)/3*10+3)))
 	tele(1,2,4);
@@ -220,7 +220,7 @@ initMaps()
 	tele(6,7,2);
 	tele(7,8,6);
 	tele(8,3,6);
-	#undef tele
+#undef tele
 
 	maps[5].obstacles.push_back(Obstacle(Point(0, 10), 2, 0, Point(30, 10)));
 	maps[5].obstacles.push_back(Obstacle(Point(0, 20), 2, 0, Point(30, 20)));
@@ -326,7 +326,6 @@ linecircle(Point p, Point q, Point r, float rad = pw)
 	}
 	return false;
 }
-
 
 void
 rect(float w, float h, float r, float g, float b, float a)
@@ -436,7 +435,7 @@ initLists()
 		glEnd();
 		glBegin(GL_POLYGON);
 		glColor3f(0.5, 1, 1);
-		for (float T=0;T<2*M_PI;T+=2*M_PI/N)
+		for (float T = 0; T < 2 * M_PI; T += 2 * M_PI / N)
 			glVertex3f(cos(T), sin(T), 4);
 		glEnd();
 		glEndList();
@@ -447,8 +446,9 @@ initLists()
 		glBegin(GL_POLYGON);
 		glColor3f(0, 0, 1);
 		const int N = 100;
-		for (float T=0;T<2*M_PI;T+=2*M_PI/N)
-			glVertex2f(cos(T)*(fabs(sin(2*T))+0.5)*0.7*pw, sin(T)*(fabs(sin(2*T))+0.5)*0.7*pw);
+		for (float T = 0; T < 2 * M_PI; T += 2 * M_PI / N)
+			glVertex2f(cos(T)*(fabs(sin(2*T))+0.5)*0.7*pw, 
+				sin(T)*(fabs(sin(2*T))+0.5)*0.7*pw);
 		glEnd();
 		glEndList();
 	}
@@ -470,8 +470,8 @@ initLists()
 		const float DV = 4./N;
 		glBegin(GL_QUADS);
 		glColor3f(1, 1, 0);
-		for (float U=0;U<2*M_PI;U+=DU)
-			for (float V=0;V<4;V+=DV) {
+		for (float U = 0; U < 2 * M_PI; U += DU)
+			for (float V = 0; V < 4; V += DV) {
 				glVertex3f(sin(U)*0.5, cos(U)*0.5, V);
 				glVertex3f(sin(U+DU)*0.5, cos(U+DU)*0.5, V);
 				glVertex3f(sin(U+DU)*0.5, cos(U+DU)*0.5, V+DV);
@@ -480,13 +480,13 @@ initLists()
 		glEnd();
 		glTranslatef(0, 0, 3.85);
 		glBegin(GL_POLYGON);
-		for (float T=0;T<2*M_PI;T+=2*M_PI/N)
+		for (float T = 0; T < 2 * M_PI; T += 2 * M_PI / N)
 			glVertex3f(cos(T)*0.5, sin(T)*0.5, 0);
 		glEnd();
 		glRotatef(45, 0, 1, 0);
 		glBegin(GL_QUADS);
-		for (float U=0;U<2*M_PI;U+=DU)
-			for (float V=0;V<2;V+=DV) {
+		for (float U = 0; U < 2* M_PI; U += DU)
+			for (float V = 0; V < 2; V += DV) {
 				glVertex3f(sin(U)*0.5, cos(U)*0.5, V);
 				glVertex3f(sin(U+DU)*0.5, cos(U+DU)*0.5, V);
 				glVertex3f(sin(U+DU)*0.5, cos(U+DU)*0.5, V+DV);
@@ -501,8 +501,8 @@ initLists()
 		glNewList(font[i], GL_COMPILE);
 		for (int j = 0; j < 8; j++) {
 			unsigned char c = gfxPrimitivesFontdata[i*8+j];
-			for (int k=0;k<8;k++)
-				if (c & (1 << (7-k))) {
+			for (int k = 0; k < 8; k++)
+				if (c & (1 << (7 - k))) {
 					glBegin(GL_QUADS);
 					glVertex2f(.125*k, .125*j);
 					glVertex2f(.125*k, .125*(j+1));
@@ -671,9 +671,9 @@ drawscene()
 				glTranslatef(0, 0, 0.05*(sin(10*state.t)+1.5));
 				glBegin(GL_LINE_LOOP);
 				if (state.energy >= map.obstacles[i].par)
-					glColor3f(0,1,0);
+					glColor3f(0, 1, 0);
 				else
-					glColor3f(1,0,0);
+					glColor3f(1, 0, 0);
 				glVertex2f(1.15*pw, 1.15*pw);
 				glVertex2f(-1.15*pw, 1.15*pw);
 				glVertex2f(-1.15*pw, -1.15*pw);
@@ -704,7 +704,7 @@ drawscene()
 			glVertex3f(-1, 1, 0);
 			glEnd();
 			float T = fmod(4*state.t, pw);
-			for (float j = 0; j < map.obstacles[i].par; j+=pw) {
+			for (float j = 0; j < map.obstacles[i].par; j += pw) {
 				glPushMatrix();
 				float R = T + pw*j;
 				glScalef(R, R, R);
@@ -744,7 +744,7 @@ drawscene()
 			glPushMatrix();
 			glTranslatef(map.obstacles[i].p.x, map.obstacles[i].p.y, 0);
 			if (state.canon >= 0) {
-				float angle = -atan2(mY, mX)/M_PI*180;
+				float angle = -atan2(mY, mX) / M_PI*180;
 				glRotatef(angle, 0, 0, 1);
 			}
 			glCallList(lobst[9]);
@@ -793,9 +793,9 @@ drawscene()
 		glPushMatrix();
 		float X, Y, Z, T;
 		const float k = 1;
-		T = 10*(state.t - state.shots[i].t);
-		X = state.shots[i].p.x + sqrt(2)/2*state.shots[i].v*T*state.shots[i].d.x;
-		Y = state.shots[i].p.y - sqrt(2)/2*state.shots[i].v*T*state.shots[i].d.y;
+		T = 10 * (state.t - state.shots[i].t);
+		X = state.shots[i].p.x + sqrt(2)/2 * state.shots[i].v * T * state.shots[i].d.x;
+		Y = state.shots[i].p.y - sqrt(2)/2 * state.shots[i].v * T * state.shots[i].d.y;
 		Z = -k*T*T/2 + sqrt(2)/2*state.shots[i].v*T + 4;
 		glTranslatef(X, Y, Z);
 		glScalef(0.3, 0.3, 0.3);
@@ -849,7 +849,7 @@ validpos(Point p, int mode=0)
 
 
 int
-main(int argc, char** argv)
+main(void)
 {
 	srand(time(0));
 	SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER);
@@ -869,7 +869,7 @@ main(int argc, char** argv)
 	glClearDepth(1.0f);
 	glEnable(GL_DEPTH_TEST);
 	glDepthFunc(GL_LEQUAL);
-	glHint(GL_PERSPECTIVE_CORRECTION_Hint, GL_NICEST);
+	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
 	glViewport(0, 0, resx, resy);
 	nonorthogonal();
 	atexit(SDL_Quit);
@@ -877,8 +877,7 @@ main(int argc, char** argv)
 	initLists();
 	initMaps();
 
-	bool running = true;
-	bool mau = false;
+	bool running = true, mau = false;
 	while (running) {
 		SDL_Event event;
 		unsigned long ticks = SDL_GetTicks();
@@ -890,7 +889,7 @@ main(int argc, char** argv)
 				case SDL_QUIT: running = false; break;
 				case SDL_KEYDOWN:
 					switch (event.key.keysym.sym) {
-						case SDLK_ESCAPE: running = false;
+						case SDLK_ESCAPE: running = false; break;
 						case 'r': state = map.begin; break;
 						case 't': showtime = !showtime; break;
 						case SDLK_PAGEUP: if (grad > -90) --grad; break;
@@ -917,27 +916,21 @@ main(int argc, char** argv)
 					}
 				break;
 			}
-		
 		if (mau && !state.success && state.canon < 0) {
 			if (mX > 0.7) mX = 0.7;
 			if (mY > 0.7) mY = 0.7;
-			if (validpos(state.p + Point(mX,-mY))) {
+			if (validpos(state.p + Point(mX, -mY))) {
 				state.p.x += mX;
 				state.p.y -= mY;
-			}
-			else if (validpos(state.p + Point(mX,0))) {
+			} else if (validpos(state.p + Point(mX, 0))) {
 				state.p.x += mX;
-				while (validpos(state.p + Point(0,-0.01*sgn(mY)))) {
+				while (validpos(state.p + Point(0, -0.01 * sgn(mY))))
 					state.p.y -= 0.01 * sgn(mY);
-				}
-			}
-			else if (validpos(state.p + Point(0,-mY))) {
+			} else if (validpos(state.p + Point(0, -mY))) {
 				state.p.y -= mY;
-				while (validpos(state.p + Point(0.01*sgn(mX), 0))) {
+				while (validpos(state.p + Point(0.01 * sgn(mX), 0)))
 					state.p.x += 0.01 * sgn(mX);
-				}
-			}
-			else while (validpos(state.p + Point(0.01 * sgn(mX), -0.01 * sgn(mY))))
+			} else while (validpos(state.p + Point(0.01 * sgn(mX), -0.01 * sgn(mY))))
 				state.p = state.p + Point(0.01 * sgn(mX), -0.01 * sgn(mY));
 		}
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -1045,4 +1038,5 @@ main(int argc, char** argv)
 		while ((SDL_GetTicks() - ticks) < 20)
 			SDL_Delay(20 - (SDL_GetTicks() - ticks));
 	}
+	return 0;
 }
